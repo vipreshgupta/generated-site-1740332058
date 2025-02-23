@@ -1,0 +1,509 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book appointments with expert technicians for household appliance repair and servicing.">
+    <title>Technician Appointment Booking</title>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 85%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .py-3 {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #333333;
+            color: #ffffff;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        header nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: #1E90FF;
+        }
+
+        /* Hero Section Styles */
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1621905251189-0f3976953b58') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px; /* Adjust for fixed header */
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #ffffff;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #1E90FF;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0d47a1;
+        }
+
+        /* Services Section Styles */
+        #services {
+            padding: 3rem 0;
+            background-color: #2c2c54;
+        }
+
+        #services h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* How It Works Section Styles */
+        #how-it-works {
+            padding: 3rem 0;
+            background-color: #1a1a2e;
+        }
+
+        #how-it-works h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Price Estimates Section Styles */
+        #pricing {
+            padding: 3rem 0;
+            background-color: #2c2c54;
+        }
+
+        #pricing h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .price-estimator {
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .price-estimator label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-estimator select, .price-estimator input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+            color: #333333;
+        }
+
+        .price-estimator .estimate-output {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Testimonials Section Styles */
+        #testimonials {
+            padding: 3rem 0;
+            background-color: #1a1a2e;
+        }
+
+        #testimonials h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial {
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .testimonial p {
+            font-style: italic;
+        }
+
+        /* Contact Section Styles */
+        #contact {
+            padding: 3rem 0;
+            background-color: #2c2c54;
+        }
+
+        #contact h2 {
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .contact-form {
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #ffffff;
+            color: #333333;
+        }
+
+        .contact-form button {
+            display: inline-block;
+            background-color: #1E90FF;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #0d47a1;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333333;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            #hero {
+                height: auto;
+                padding: 50px 20px;
+            }
+
+            #hero h1 {
+                font-size: 2rem;
+            }
+
+            .service-grid, .steps-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <h1>Expert Appliance Repair Services</h1>
+            <p>Get your household appliances fixed quickly and efficiently.</p>
+            <a href="#services" class="btn">Explore Services</a>
+        </div>
+    </section>
+
+    <!-- Services Offered -->
+    <section id="services">
+        <div class="container">
+            <h2 class="text-center">Our Services</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" alt="RO Service">
+                    <h3>RO Service</h3>
+                    <p>Expert repair and maintenance for your RO water purifier.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1594837789354-59561539624c" alt="Washing Machine Service">
+                    <h3>Washing Machine Service</h3>
+                    <p>Comprehensive repair and servicing for all washing machine brands.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1504674908947-e52985597f21" alt="Chimney Service">
+                    <h3>Chimney Service</h3>
+                    <p>Professional cleaning and repair services for kitchen chimneys.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1603796846097-bee99e4a6b5f" alt="AC Service">
+                    <h3>AC Service</h3>
+                    <p>Reliable AC repair, installation, and maintenance services.</p>
+                </div>
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1536353284927-651435d57d7b" alt="Refrigerator Service">
+                    <h3>Refrigerator Service</h3>
+                    <p>Expert repair and servicing for refrigerators of all types.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+        <div class="container">
+            <h2 class="text-center">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step">
+                    <h3>Step 1: Select Service</h3>
+                    <p>Choose the service you need from our list of offerings.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 2: Book Appointment</h3>
+                    <p>Schedule a convenient time for our technician to visit.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 3: Get Estimate</h3>
+                    <p>Receive a price estimate based on your selected service.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 4: Technician Visit</h3>
+                    <p>Our expert technician will arrive and perform the service.</p>
+                </div>
+                <div class="step">
+                    <h3>Step 5: Enjoy Service</h3>
+                    <p>Your appliance is fixed and ready to use!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Estimates -->
+    <section id="pricing">
+        <div class="container">
+            <h2 class="text-center">Price Estimates</h2>
+            <div class="price-estimator">
+                <label for="service-type">Select Service:</label>
+                <select id="service-type">
+                    <option value="ro">RO Service</option>
+                    <option value="washing-machine">Washing Machine Service</option>
+                    <option value="chimney">Chimney Service</option>
+                    <option value="ac">AC Service</option>
+                    <option value="refrigerator">Refrigerator Service</option>
+                </select>
+
+                <label for="issue-description">Describe the Issue:</label>
+                <textarea id="issue-description" rows="3" placeholder="Briefly describe the issue..."></textarea>
+
+                <label for="estimate-output">Estimated Cost:</label>
+                <div id="estimate-output" class="estimate-output">$0</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Testimonials -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="text-center">Customer Testimonials</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p>"Great service! The technician was professional and fixed my AC quickly."</p>
+                    <p>- John Doe</p>
+                </div>
+                <div class="testimonial">
+                    <p>"Very satisfied with the RO service. Highly recommend!"</p>
+                    <p>- Jane Smith</p>
+                </div>
+                <div class="testimonial">
+                    <p>"Excellent washing machine repair. Technician was knowledgeable and courteous."</p>
+                    <p>- Mark Johnson</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="text-center">Contact Us</h2>
+            <div class="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Your Name">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Your Email">
+
+                <label for="message">Message:</label>
+                <textarea id="message" rows="5" placeholder="Your Message"></textarea>
+
+                <button type="submit">Send Message</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Technician Appointment Booking. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Price Estimator Logic
+        const serviceTypeSelect = document.getElementById('service-type');
+        const estimateOutput = document.getElementById('estimate-output');
+
+        const basePrices = {
+            ro: 50,
+            'washing-machine': 75,
+            chimney: 60,
+            ac: 80,
+            refrigerator: 70
+        };
+
+        function updateEstimate() {
+            const selectedService = serviceTypeSelect.value;
+            const basePrice = basePrices[selectedService] || 0;
+            estimateOutput.textContent = `$${basePrice}`;
+        }
+
+        serviceTypeSelect.addEventListener('change', updateEstimate);
+
+        // Initial estimate update
+        updateEstimate();
+
+        // Form Submission Placeholder
+        document.querySelector('.contact-form button').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent actual form submission
+            alert('Message sent successfully!'); // Placeholder action
+            // Here you would typically handle the form submission via AJAX
+        });
+    </script>
+</body>
+</html>
